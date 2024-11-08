@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
-  
+        const role = document.getElementById('role').value;
         try {
           const response = await fetch('/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ username, password, role }),
           });
   
           const data = await response.json();
@@ -55,5 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
-  });
-  
+  // After successful login
+if (response.ok) {
+  alert(data.message);
+  if (data.role === 'vendor') {
+    window.location.href = '/vendor_dashboard.html';
+  } else {
+    window.location.href = '/';
+  }
+}
+});

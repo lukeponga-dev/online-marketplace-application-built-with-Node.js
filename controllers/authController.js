@@ -14,7 +14,7 @@ exports.registerUser = async (req, res) => {
     return res.status(400).json({ message: errors.array()[0].msg });
   }
 
-  const { username, password } = req.body;
+  const { username, password, role } = req.body;
 
   try {
     // Check if username already exists
@@ -24,13 +24,15 @@ exports.registerUser = async (req, res) => {
     }
 
     // Create and save the new user
-    user = new User({ username, password });
+    user = new User({ username, password, role });
     await user.save();
-
-    // Generate JWT token
-    const token = jwt.sign({ id: user._id, username: user.username }, jwtSecret, {
-      expiresIn: '1h',
-    });
+    
+// Generate JWT token 
+const token = jwt.sign( 
+{ id: user._id, username: user.username, role: user.role }, 
+jwtSecret, 
+{ expiresIn: '1h' } 
+);
 
     // Set cookie
     res.cookie('token', token, { httpOnly: true });
@@ -74,7 +76,7 @@ exports.loginUser = async (req, res) => {
     // Set cookie
     res.cookie('token', token, { httpOnly: true });
 
-    res.json({ message: 'User logged in successfully' });
+    res.json({ message: 'User logged in successfully', role: user.role });
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).json({ message: 'Server error' });

@@ -3,6 +3,9 @@ const express = require('express');
 const router = express.Router();
 const { registerUser, loginUser } = require('../controllers/authController');
 const { check } = require('express-validator');
+const generateToken = (user) => {
+  return jwt.sign({ id: user.id, role: user.role }, 'your_jwt_secret', { expiresIn: '1h' });
+};
 
 // Registration route
 router.post(

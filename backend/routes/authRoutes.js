@@ -1,35 +1,39 @@
-// routes/auth.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { registerUser, loginUser } = require('../controllers/authController');
-const { check } = require('express-validator');
-const generateToken = (user) => {
-  return jwt.sign({ id: user.id, role: user.role }, 'your_jwt_secret', { expiresIn: '1h' });
-};
+const { check } = require("express-validator");
+const {
+  registerUser,
+  loginUser,
+  logoutUser,
+  isAuthenticated,
+} = require("../controllers/authController");
 
-// Registration route
 router.post(
-  '/register',
+  "/register",
   [
-    // Input validation
-    check('username', 'Username is required').notEmpty(),
-    check('password', 'Password must be at least 6 characters').isLength({ min: 6 }),
+    check("username", "Username is required").notEmpty(),
+    check("password", "Password must be at least 6 characters").isLength({
+      min: 6,
+    }),
+    check("role", "Role must be either vendor or buyer").isIn([
+      "vendor",
+      "buyer",
+    ]),
   ],
   registerUser
 );
 
-// Login route
 router.post(
-  '/login',
+  "/login",
   [
-    check('username', 'Username is required').notEmpty(),
-    check('password', 'Password is required').notEmpty(),
+    check("username", "Username is required").notEmpty(),
+    check("password", "Password is required").notEmpty(),
   ],
   loginUser
 );
 
-module.exports = router;
-const { logoutUser, isAuthenticated } = require('../controllers/authController');
+router.get("/logout", logoutUser);
 
-router.get('/logout', logoutUser);
-router.get('/isAuthenticated', isAuthenticated);
+router.get("/isAuthenticated", isAuthenticated);
+
+module.exports = router;

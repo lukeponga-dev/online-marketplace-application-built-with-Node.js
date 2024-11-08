@@ -1,9 +1,8 @@
 // controllers/authController.js
-const User = require('../models/user');
+const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
-
-const jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret_key';
+const jwtSecret = process.env.JWT_SECRET;
 
 // Register a new user
 exports.registerUser = async (req, res) => {

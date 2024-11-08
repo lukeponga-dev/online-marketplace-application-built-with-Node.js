@@ -14,6 +14,12 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required minlength="6" />
 
+    <label for="role">I am a:</label> 
+    <select id="role" name="role" required> 
+      <option value="buyer">Buyer</option> 
+      <option value="vendor">Vendor</option> 
+    </select>
+
     <button type="submit">Register</button>
   </form>
   <script src="js/auth.js"></script>

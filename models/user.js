@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: 
+  { type: String,
+     enum: ['vendor', 'buyer'],
+      default: 'buyer', // Default role is 'buyer'
+  },
   // Additional fields can be added here (e.g., email, role)
 });
 

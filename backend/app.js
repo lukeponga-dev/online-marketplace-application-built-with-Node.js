@@ -19,9 +19,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Import routes
-const authRoutes = require('./routes/auth');
-const productRoutes = require('./routes/products');
-const checkoutRoutes = require('./routes/checkout');
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -36,9 +36,9 @@ const connectDB = async () => {
 connectDB();
 
 // Routes
-app.use('/auth', authRoutes);
-app.use('/products', productRoutes);
-app.use('/checkout', checkoutRoutes);
+app.use('/authRoutes', authRoutes);
+app.use('/productRoutes', productRoutes);
+app.use('/orderRoutes', orderRoutes);
 
 // Catch-all route for serving the main page
 app.get('*', (req, res) => {

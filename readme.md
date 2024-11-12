@@ -1,3 +1,4 @@
+```
 Tor (The Onion Router) is a network designed to enhance privacy and anonymity on the internet. It achieves this by routing internet traffic through multiple nodes, encrypting it at each step, and making it challenging to trace the source of the traffic. Let's break down the technical aspects of how Tor works.
 
 Key Concepts of Tor
@@ -128,7 +129,7 @@ RSA Encryption: Used for exchanging session keys between nodes.
 AES Encryption: Used for encrypting data between nodes.
 
 Diffie-Hellman Key Exchange
-
+```
 
 
 
